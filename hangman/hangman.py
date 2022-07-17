@@ -47,9 +47,9 @@ def hangman():
                 print('\nThat is not a valid letter.')
 
             if lives == 0:
-                print('You lose')
+                print('You lose, the word is:', word)
             elif len(word_letters) == 0:
-                print('You Win')
+                print('You Win, the word is:', word)
 
 
 hangman()
