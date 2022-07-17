@@ -50,6 +50,6 @@ def hangman():
                 print('You lose')
             elif len(word_letters) == 0:
                 print('You Win')
-            
-            
+
+
 hangman()
