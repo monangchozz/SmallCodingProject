@@ -15,30 +15,41 @@ def hangman():
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # what the user has guessed
 
+    lives = 7
+
     # getting user input
-    while len(word_letters) > 0 :
-        # letters used
-        # ' '.join(['a', 'b', 'cd']) --> 'a b cd'
-        print('you have used these letters: ', ' '.join(used_letters))
+    while len(word_letters) > 0 and lives > 0:
 
-        # what current word is (ie W - R D)
-        word_list = [letter if letter in used_letters else '-' for letter in word]
-        print('Current word: ', ' '.join(word_list))
+            # letters used
+            # ' '.join(['a', 'b', 'cd']) --> 'a b cd'
+            print('you have used these letters: ', ' '.join(used_letters))
+            print('Total lives left:', + lives)
 
-        user_letter = input('Guess a letter: ').upper()
-        if user_letter in alphabet - used_letters:
-            used_letters.add(user_letter)
-            if user_letter in word_letters:
-                word_letters.remove(user_letter)
-                print('')
+            # what current word is (ie W - R D)
+            word_list = [letter if letter in used_letters else '-' for letter in word]
+            print('Current word: ', ' '.join(word_list))
+
+            user_letter = input('Guess a letter: ').upper()
+            if user_letter in alphabet - used_letters:
+                used_letters.add(user_letter)
+                if user_letter in word_letters:
+                    word_letters.remove(user_letter)
+                    print('')
+
+                else:
+                    print('\nYour letter,', user_letter, 'is not in the word.')
+                    lives = lives - 1
+
+            elif user_letter in used_letters:
+                print('\nYou have already used that letter. Guess another letter.')
 
             else:
-                print('\nYour letter,', user_letter, 'is not in the word.')
+                print('\nThat is not a valid letter.')
 
-        elif user_letter in used_letters:
-            print('\nYou have already used that letter. Guess another letter.')
-
-        else:
-            print('\nThat is not a valid letter.')
-
+            if lives == 0:
+                print('You lose')
+            elif len(word_letters) == 0:
+                print('You Win')
+            
+            
 hangman()
